@@ -1,0 +1,64 @@
+﻿@model TeendokListaWeb.Models.feladat
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>feladat</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cim)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Szoveg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Szoveg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LetrehozasDatum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LetrehozasDatum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Teljesitve)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Teljesitve)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.felhasznalo.FelhasznaloNev)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.felhasznalo.FelhasznaloNev)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

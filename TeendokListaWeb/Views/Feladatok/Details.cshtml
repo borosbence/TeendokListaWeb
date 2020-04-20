@@ -1,0 +1,58 @@
+﻿@model TeendokListaWeb.Models.feladat
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>feladat</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cim)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Szoveg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Szoveg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LetrehozasDatum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LetrehozasDatum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Teljesitve)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Teljesitve)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.felhasznalo.FelhasznaloNev)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.felhasznalo.FelhasznaloNev)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
