@@ -11,7 +11,8 @@
 
     <div class="row" style="margin-bottom: 10px">
         <div class="col-lg-8">
-            <button class="btn" data-toggle="collapse" data-target="#ertekezletForm">Új</button>
+            <button class="btn" data-toggle="collapse" data-target="#ertekezletForm">Szerkesztő felület</button>
+            <button class="btn" ng-click="selected = null">Új</button>
         </div>
         <div class="col-lg-4">
             <div class="input-group">
@@ -22,37 +23,43 @@
         </div>
     </div>
 
-    <div class="collapse panel panel-default" id="ertekezletForm">
+    <div class="collapse panel panel-default container" id="ertekezletForm">
         <form>
             <div class="form-group">
                 <label>Név</label>
                 <input type="text" class="form-control" placeholder="Név"
-                       ng-model="ujErtekezlet.nev" />
+                       required
+                       ng-model="selected.nev" />
             </div>
             <div class="form-group">
                 <label>Kezdet</label>
                 <input type="datetime-local" class="form-control"
-                        ng-model="ujErtekezlet.kezdet_datum" />
+                       required
+                        ng-model="selected.kezdet_datum" />
             </div>
             <div class="form-group">
                 <label>Vég</label>
                 <input type="datetime-local" class="form-control"
-                        ng-model="ujErtekezlet.veg_datum" />
+                       required
+                        ng-model="selected.veg_datum" />
             </div>
             <div class="form-group">
                 <label>Leírás</label>
-                <textarea class="form-control" rows="10" ng-model="ujErtekezlet.leiras"></textarea>
+                <textarea class="form-control" rows="5" ng-model="selected.leiras"></textarea>
             </div>
             <div class="form-group">
                 <label>Létszám</label>
-                <input type="number" class="form-control" min="2" placeholder="Létszám" ng-model="ujErtekezlet.letszam" />
+                <input type="number" class="form-control" min="2" placeholder="Létszám"
+                       required
+                       ng-model="selected.letszam"
+                       ng-min="2"/>
             </div>
             <div class="form-group">
                 <label>Online?</label>
-                <input type="checkbox" ng-model="ujErtekezlet.online" />
+                <input type="checkbox" ng-model="selected.online" />
             </div>
         </form>
-        <button class="btn" ng-click="post(ujErtekezlet)">Mentés</button>
+        <button class="btn" ng-click="save(selected)">Mentés</button>
     </div>
 
     <div class="table-responsive">
@@ -83,8 +90,8 @@
             <tbody ng-repeat="ertekezlet in ertekezletekArr | filter:search | orderBy: sortKey:reverse">
                 <tr>
                     <td>{{ ertekezlet.nev }}</td>
-                    <td>{{ ertekezlet.kezdet_datum | date:'yyyy.MM.dd HH:mm:ss'}}</td>
-                    <td>{{ ertekezlet.veg_datum | date:'yyyy.MM.dd HH:mm:ss' }}</td>
+                    <td>{{ ertekezlet.kezdet_datum | date:'yyyy.MM.dd HH:mm'}}</td>
+                    <td>{{ ertekezlet.veg_datum | date:'yyyy.MM.dd HH:mm' }}</td>
                     <td>{{ ertekezlet.leiras }}</td>
                     <td>{{ ertekezlet.letszam }}</td>
                     <td>
@@ -96,6 +103,9 @@
                         </span>
                     </td>
                     <td>
+                        <button class="btn" ng-click="select(ertekezlet)">
+                            <i class="glyphicon glyphicon-edit"></i>
+                        </button>
                         <button class="btn" ng-click="delete(ertekezlet)">
                             <i class="glyphicon glyphicon-trash"></i>
                         </button>

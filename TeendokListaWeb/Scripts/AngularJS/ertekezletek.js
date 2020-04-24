@@ -2,15 +2,21 @@
 
 app.controller('tabledata', function ($scope, $http) {
     $scope.ertekezletekArr = []; // Üres tömb létrehozása
-    $scope.ujErtekezlet = {};
+    $scope.selected = {};
     // Adatok lekérdezése
     $http.get("/api/Ertekezletek")
         .then(function (response) {
             // Tömbök feltöltése
+            angular.forEach(response.data, function (data) {
+                data.kezdet_datum = new Date(data.kezdet_datum);
+                if (data.veg_datum) {
+                    data.veg_datum = new Date(data.veg_datum);
+                }
+            });
             $scope.ertekezletekArr = response.data;
-            console.log($scope.ertekezletekArr);
         })
         .catch(function (response) {
+            console.log(response);
             $scope.error = response.statusText;
         });
 
@@ -22,16 +28,50 @@ app.controller('tabledata', function ($scope, $http) {
         $scope.sortKey = keyname;
     }
 
+    // Kijelölés
+    $scope.select = function (ertekezlet) {
+        $scope.selected = ertekezlet;
+    }
+
+    // Mentés
+    $scope.save = function (ertekezlet) {
+        console.log(ertekezlet);
+        if (ertekezlet.id) {
+            $scope.put(ertekezlet)
+        }
+        else {
+            $scope.post(ertekezlet);
+        }
+    }
+
     // Létrehozás
     $scope.post = function (ertekezlet) {
-        $scope.ujErtekezlet = null;
         $http.post("api/Ertekezletek", JSON.stringify(ertekezlet))
-            .then(function () {
+            .then(function (response) {
+                ertekezlet.id = response.data.id;
                 $scope.ertekezletekArr.push(ertekezlet);
-                $scope.ujErtekezlet = null;
+
+                $scope.selected = null;
             })
             .catch(function (response) {
-                $scope.error = response.statusText;
+                console.log(response);
+                $scope.error = response.data.Message;
+            });
+    }
+
+    // Módosítás
+    $scope.put = function (ertekezlet) {
+        $http.put("api/Ertekezletek", JSON.stringify(ertekezlet))
+            .then(function () {
+                // Kikeresés a tömbből
+                //var index = $scope.dataArray.indexOf(ertekezlet);
+                //$scope.dataArray[index] = ertekezlet;
+
+                $scope.selected = null;
+            })
+            .catch(function (response) {
+                console.log(response);
+                $scope.error = response.data.Message;
             });
     }
 

@@ -37,16 +37,11 @@ namespace TeendokListaWeb.Controllers.ApiControllers
 
         // PUT: api/Ertekezletek/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult Putertekezlet(int id, ertekezlet ertekezlet)
+        public IHttpActionResult Putertekezlet(ertekezlet ertekezlet)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-
-            if (id != ertekezlet.id)
-            {
-                return BadRequest();
             }
 
             db.Entry(ertekezlet).State = EntityState.Modified;
@@ -57,7 +52,7 @@ namespace TeendokListaWeb.Controllers.ApiControllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ertekezletExists(id))
+                if (!ertekezletExists(ertekezlet.id))
                 {
                     return NotFound();
                 }
