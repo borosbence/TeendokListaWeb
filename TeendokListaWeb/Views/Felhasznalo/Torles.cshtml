@@ -1,0 +1,40 @@
+﻿@model TeendokListaWeb.Models.felhasznalo
+
+@{
+    ViewBag.Title = "Törlés";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Biztosan szeretné törölni az elemet?</h3>
+<div>
+    <h4>Felhasználó</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.felhasznalonev)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.felhasznalonev)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.jelszo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jelszo)
+        </dd>*@
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Törlés" class="btn btn-default" /> |
+            @Html.ActionLink("Vissza a listához", "Index")
+        </div>
+    }
+</div>

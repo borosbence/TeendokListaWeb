@@ -1,0 +1,39 @@
+﻿@model IEnumerable<TeendokListaWeb.Models.felhasznalo>
+
+@{
+    ViewBag.Title = "Felhasznalók";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Új létrehozása", "Letrehozas")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.felhasznalonev)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jelszo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.felhasznalonev)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.jelszo)
+        </td>*@
+        <td>
+            @Html.ActionLink("Szerkesztés", "Szerkesztes", new { id=item.id }) |
+            @Html.ActionLink("Részletek", "Reszletek", new { id=item.id }) |
+            @Html.ActionLink("Törlés", "Torles", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
