@@ -157,6 +157,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ApiControllers\ErtekezletekController.cs" />
+    <Compile Include="Controllers\ErtekezletekController.cs" />
     <Compile Include="Controllers\FeladatController.cs" />
     <Compile Include="Controllers\FelhasznaloController.cs" />
     <Compile Include="Global.asax.cs">
@@ -200,6 +202,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="lib\angular.js\angular.min.js" />
     <Content Include="Models\TeendokModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>TeendokModel.edmx</DependentUpon>
@@ -210,6 +213,7 @@
       <DependentUpon>TeendokModel.edmx</DependentUpon>
       <LastGenOutput>TeendokModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\AngularJS\ertekezletek.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\TeendokModel.edmx">
@@ -219,6 +223,7 @@
     <Content Include="Models\TeendokModel.edmx.diagram">
       <DependentUpon>TeendokModel.edmx</DependentUpon>
     </Content>
+    <Content Include="libman.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -251,6 +256,7 @@
     <Content Include="Views\Felhasznalo\Reszletek.cshtml" />
     <Content Include="Views\Felhasznalo\Szerkesztes.cshtml" />
     <Content Include="Views\Felhasznalo\Torles.cshtml" />
+    <Content Include="Views\Ertekezletek\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,121 @@
+﻿
+@{ ViewBag.Title = "Értekezletek"; }
+
+<h2>@ViewBag.Title</h2>
+
+<div ng-app="ertekezletek"
+     ng-controller="tabledata">
+    <div class="alert-danger">{{ error }}</div>
+
+    <div class="row" style="margin-bottom: 10px">
+        <div class="col-lg-8">
+            <button class="btn" data-toggle="collapse" data-target="#ertekezletForm">Szerkesztő felület</button>
+            <button class="btn" ng-click="selected = null">Új</button>
+        </div>
+        <div class="col-lg-4">
+            <div class="input-group">
+                <input class="form-control" placeholder="Keresés…" type="search"
+                       ng-model="search">
+                <span class="input-group-addon">Keresés</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="collapse panel panel-default container" id="ertekezletForm">
+        <form>
+            <div class="form-group">
+                <label>Név</label>
+                <input type="text" class="form-control" placeholder="Név"
+                       required
+                       ng-model="selected.nev" />
+            </div>
+            <div class="form-group">
+                <label>Kezdet</label>
+                <input type="datetime-local" class="form-control"
+                       required
+                       ng-model="selected.kezdet_datum" />
+            </div>
+            <div class="form-group">
+                <label>Vég</label>
+                <input type="datetime-local" class="form-control"
+                       required
+                       ng-model="selected.veg_datum" />
+            </div>
+            <div class="form-group">
+                <label>Leírás</label>
+                <textarea class="form-control" rows="5" ng-model="selected.leiras"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Létszám</label>
+                <input type="number" class="form-control" min="2" placeholder="Létszám"
+                       required
+                       ng-model="selected.letszam"
+                       ng-min="2" />
+            </div>
+            <div class="form-group">
+                <label>Online?</label>
+                <input type="checkbox" ng-model="selected.online" />
+            </div>
+        </form>
+        <button class="btn" ng-click="save(selected)">Mentés</button>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>
+                        <a href="" ng-click="sort('nev')">Név</a>
+                    </th>
+                    <th>
+                        <a href="" ng-click="sort('kezdet_datum')">Kezdet</a>
+                    </th>
+                    <th>
+                        <a href="" ng-click="sort('veg_datum')">Vég</a>
+                    </th>
+                    <th>
+                        <a href="" ng-click="sort('leiras')">Leírás</a>
+                    </th>
+                    <th>
+                        <a href="" ng-click="sort('letszam')">Létszám</a>
+                    </th>
+                    <th>
+                        <a href="" ng-click="sort('online')">Online</a>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="ertekezlet in ertekezletekArr | filter:search | orderBy: sortKey:reverse">
+                <tr>
+                    <td>{{ ertekezlet.nev }}</td>
+                    <td>{{ ertekezlet.kezdet_datum | date:'yyyy.MM.dd HH:mm'}}</td>
+                    <td>{{ ertekezlet.veg_datum | date:'yyyy.MM.dd HH:mm' }}</td>
+                    <td>{{ ertekezlet.leiras }}</td>
+                    <td>{{ ertekezlet.letszam }}</td>
+                    <td>
+                        <span ng-if="ertekezlet.online">
+                            <i class="glyphicon glyphicon-ok"></i>
+                        </span>
+                        <span ng-if="!ertekezlet.online">
+                            <i class="glyphicon glyphicon-minus"></i>
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn" ng-click="select(ertekezlet)">
+                            <i class="glyphicon glyphicon-edit"></i>
+                        </button>
+                        <button class="btn" ng-click="delete(ertekezlet)">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+@section scripts{
+    <script src="~/lib/angular.js/angular.min.js"></script>
+    <script src="~/Scripts/AngularJS/ertekezletek.js"></script>
+}
